@@ -1,0 +1,65 @@
+name: 'Build Branch'
+description: 'GitHub Action to push selected files from build to a given branch. Code heavily based on gh-pages action by crazy-max.'
+author: 'dsrod'
+branding:
+  color: 'green'
+  icon: 'upload-cloud'
+
+inputs:
+  domain:
+    description: 'Git domain (default github.com)'
+    required: false
+    default: 'github.com'
+  repo:
+    description: 'GitHub repository where assets will be deployed (default $GITHUB_REPOSITORY)'
+    required: false
+  target_branch:
+    description: 'Git branch where assets will be deployed'
+    required: true
+  file_wildcards:
+    description: 'Wildcards of files to be added'
+    required: true
+  keep_history:
+    description: 'Create incremental commit instead of doing push force'
+    default: 'false'
+    required: false
+  allow_empty_commit:
+    description: 'Allow an empty commit to be created'
+    default: 'true'
+    required: false
+  build_dir:
+    description: 'Build directory to deploy'
+    required: true
+  absolute_build_dir:
+    description: 'Whether to treat build_dir as an absolute path'
+    default: 'false'
+    required: false
+  follow_symlinks:
+    description: 'If enabled, the content of symbolic links will be copied'
+    default: 'false'
+    required: false
+  committer:
+    description: 'The committer name and email address'
+    required: false
+  author:
+    description: 'The author name and email address'
+    required: false
+  commit_message:
+    description: 'Commit message'
+    required: false
+  dry_run:
+    description: 'If enabled, nothing will be pushed'
+    default: 'false'
+    required: false
+  verbose:
+    description: 'Enable verbose output'
+    default: 'false'
+    required: false
+  ignore:
+    description: 'Files to ignore in .gitignore format'
+    default: ''
+    required: false
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
